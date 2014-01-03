@@ -14,13 +14,10 @@ au BufRead,BufNewFile *.h set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80
 au BufRead,BufNewFile *.md set ai et nu sw=4 ts=4 tw=80 spell spelllang=en_us
 
-nnoremap <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 nnoremap <silent> <F5> :NERDTree<CR>
-nnoremap <silent> <F6> :Tlist<CR>
+nnoremap <silent> <F6> :TagbarToggle<CR>
+nnoremap <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 
-"Tlist setting
-let Tlist_Show_One_File=1  
-let Tlist_Exit_OnlyWindow=1 
 
 set nocp 
 filetype plugin on
