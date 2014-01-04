@@ -6,6 +6,7 @@ set hlsearch
 set tabstop=4
 set shiftwidth=4
 set ai
+set ruler 
 
 "Specific file type setting
 au BufRead,BufNewFile *.cpp set cin ai et nu sw=2 ts=2
@@ -25,6 +26,10 @@ set completeopt=menu,menuone
 
 "Pathogen setting
 call pathogen#infect() 
+
+"Let supertab and snipmate work together
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabMappingForward="<S-Space>" 
 
 "Template setting
 "let g:templates_plugin_loaded = 1
