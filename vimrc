@@ -19,6 +19,8 @@ nnoremap <silent> <F5> :NERDTree<CR>
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 
+nnoremap gm :call cursor(0, len(getline('.'))/2)<cr>
+
 
 set nocp 
 filetype plugin on
