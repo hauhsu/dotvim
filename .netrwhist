@@ -1,10 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/howardxu/.vim/bundle/vim-template'
-let g:netrw_dirhist_2='/Users/howardxu/.vim/bundle/vim-template/templates'
-let g:netrw_dirhist_3='/Users/howardxu/.vim/.git'
-let g:netrw_dirhist_4='/Users/howardxu/.vim/bundle/vim-snipmate/autoload'
-let g:netrw_dirhist_5='/Users/howardxu/.vim/bundle/vim-snipmate/syntax'
-let g:netrw_dirhist_6='/Users/howardxu/Dropbox/Documents/Courses/TA/Programming/2014_spring/Video_draft'
-let g:netrw_dirhist_7='/Users/howardxu/Dropbox/Documents/Courses/TA/Programming/2014_spring/Video_draft/Ch2_simple_program'
-let g:netrw_dirhist_8='/Users/howardxu/Dropbox/Documents/Courses/TA/Programming/2014_spring/Video_draft/Ch2_int'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/howardxu/.vim/bundle/vim-template/templates'

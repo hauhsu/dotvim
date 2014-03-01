@@ -19,8 +19,11 @@ nnoremap <silent> <F5> :NERDTree<CR>
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 
+"function to move to the middle of a line.
 nnoremap gm :call cursor(0, len(getline('.'))/2)<cr>
 
+"not load templates in new file
+let g:templates_no_autocmd = 1
 
 set nocp 
 filetype plugin on
