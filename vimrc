@@ -1,11 +1,11 @@
-"Vundle
+"----Vundle
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
 	echo "Installing Vundle.."
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/Vundle.vim
 	let iCanHazVundle=0
 endif
 
@@ -20,11 +20,14 @@ filetype off                  " required
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+" Other plugins
 Plugin 'ervandew/supertab'
+Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-git'
-Plugin 'MarcWeber/vim-addon-mw-utils '
+Plugin 'git://github.com/MarcWeber/vim-addon-mw-utils.git'
 Plugin 'tomtom/tlib_vim'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'garbas/vim-snipmate'
@@ -35,7 +38,7 @@ Plugin 'Kocha/vim-systemc'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"end vundle
+"----end vundle 
 
 "General setting
 syntax on
@@ -57,7 +60,7 @@ au BufRead,BufNewFile *.h set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80
 au BufRead,BufNewFile *.md set ai et nu sw=4 ts=4 tw=80 spell spelllang=en_us
 
-nnoremap <silent> <F5> :NERDTree<CR>
+nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 
@@ -71,18 +74,10 @@ set nocp
 filetype plugin on
 set completeopt=menu,menuone
 
-"Pathogen setting
-"call pathogen#infect() 
-
-"Template setting
-"let g:templates_plugin_loaded = 1
 
 "Pandoc vim setting
 let g:pandoc_no_folding = 1
 
-"let g:NERDTreeDirArrows=0
-
-autocmd vimenter * NERDTree
 
 
 "switch to last tab
