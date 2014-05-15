@@ -33,6 +33,9 @@ Plugin 'git@github.com:vim-pandoc/vim-pandoc-syntax.git'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'Kocha/vim-systemc'
+Plugin 'git@github.com:vim-scripts/OmniCppComplete.git'
+"cannot compile vim with python support QQ
+"Plugin 'git@github.com:Valloric/YouCompleteMe.git' 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -73,6 +76,7 @@ nmap <leader>cw :cw 10<cr>
 set nocp 
 filetype plugin on
 set completeopt=menu,menuone
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
 
 "Pandoc vim setting
