@@ -22,7 +22,7 @@ filetype off                  " required
 Plugin 'gmarik/Vundle.vim'
 
 " Other plugins
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
 Plugin 'git@github.com:jistr/vim-nerdtree-tabs.git'
 Plugin 'majutsushi/tagbar'
@@ -30,13 +30,17 @@ Plugin 'tpope/vim-git'
 Plugin 'git://github.com/MarcWeber/vim-addon-mw-utils.git'
 Plugin 'tomtom/tlib_vim'
 Plugin 'git@github.com:vim-pandoc/vim-pandoc-syntax.git'
-Plugin 'garbas/vim-snipmate'
+"Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+"SystemC syntax highlight
 Plugin 'Kocha/vim-systemc'
-Plugin 'git@github.com:vim-scripts/OmniCppComplete.git'
+"Plugin 'git@github.com:vim-scripts/OmniCppComplete.git'
 Plugin 'git@github.com:elzr/vim-json.git'
-"cannot compile vim with python support QQ
-"Plugin 'git@github.com:Valloric/YouCompleteMe.git' 
+"Super auto-complete
+Plugin 'Valloric/YouCompleteMe'
+"Compile whiel texting
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,7 +61,7 @@ set ruler
 
 
 "Specific file type setting
-au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 omnifunc=omni#cpp#complete#Main tags+=~/.vim/tags/stl_tags
+au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 tags+=~/.vim/tags/stl_tags
 
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c set cin ai et nu sw=4 ts=4
@@ -76,25 +80,33 @@ nmap <leader>cw :cw 10<cr>
 
 
 " OmniCppComplete
-set nocp 
-filetype plugin on
-set completeopt=menu,menuone
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+"set nocp 
+"filetype plugin on
+"set completeopt=menu,menuone
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 
 "Pandoc vim setting
 let g:pandoc_no_folding = 1
 
-
-
 "switch to last tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+"Test map
+imap jj <ESC>
+
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
