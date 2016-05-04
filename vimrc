@@ -39,8 +39,6 @@ Plugin 'honza/vim-snippets'
 "Plugin 'Kocha/vim-systemc'
 "Compile while texting
 "Plugin 'scrooloose/syntastic'
-"Auto complete
-"Plugin 'SirVer/ultisnips'
 
 "vim with lldb
 Plugin 'gilligan/vim-lldb'
