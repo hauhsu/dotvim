@@ -128,6 +128,7 @@ nnoremap <leader>ji :YcmCompleter GoToDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_auto_trigger = 1
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 
 "share clip board
