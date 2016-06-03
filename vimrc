@@ -86,7 +86,7 @@ set mouse=a
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.md set ai et nu sw=4 ts=4 tw=80 spell spelllang=en_us
+au BufRead,BufNewFile *.md set ai et nu sw=4 ts=4 tw=80 spell spelllang=en_us filetype=markdown
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 spell
 
 nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
