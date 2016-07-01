@@ -62,6 +62,9 @@ Plugin 'tpope/vim-commentary'
 "Easy Grep
 Plugin 'dkprice/vim-easygrep'
 
+"Auto pair
+Plugin 'jiangmiao/auto-pairs'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -92,12 +95,15 @@ au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 spell
 nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
 nnoremap <silent> <F6> :TagbarToggle<CR>
 
+"Edit and source vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "Compile in Vim
 autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
-nmap <leader>cn :cn<cr>
-nmap <leader>cp :cp<cr>
-nmap <leader>cw :cw 10<cr> 
+nnoremap <leader>cn :cn<cr>
+nnoremap <leader>cp :cp<cr>
+nnoremap <leader>cw :cw 10<cr> 
 
 
 "Pandoc vim setting
@@ -105,7 +111,7 @@ let g:pandoc_no_folding = 1
 
 "use \tl to switch to last tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " Tab navigation like Firefox.
@@ -116,7 +122,7 @@ inoremap <C-tab>   <Esc>:tabnext<CR>i
 
 
 "Test map
-imap jj <ESC>
+imap jk <ESC>
 
 "YouCompleteMe settings
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
@@ -142,3 +148,10 @@ set autochdir
 
 " Add UntiSnips path
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.vim/UltiSnips"]
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
