@@ -23,12 +23,12 @@ Plugin 'Valloric/YouCompleteMe'
 
 " Other plugins
 Plugin 'scrooloose/nerdtree'
-Plugin 'git@github.com:jistr/vim-nerdtree-tabs.git'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'majutsushi/tagbar'
 
 
 Plugin 'tomtom/tlib_vim'
-Plugin 'git@github.com:vim-pandoc/vim-pandoc-syntax.git'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
