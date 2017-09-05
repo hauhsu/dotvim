@@ -13,34 +13,89 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
- set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Other plugins
-"Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdtree'
-Plugin 'git@github.com:jistr/vim-nerdtree-tabs.git'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-git'
-Plugin 'git://github.com/MarcWeber/vim-addon-mw-utils.git'
-Plugin 'tomtom/tlib_vim'
-Plugin 'git@github.com:vim-pandoc/vim-pandoc-syntax.git'
-"Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-"SystemC syntax highlight
-Plugin 'Kocha/vim-systemc'
-"Plugin 'git@github.com:vim-scripts/OmniCppComplete.git'
-Plugin 'git@github.com:elzr/vim-json.git'
-"Super auto-complete
+" super strong auto complete 
 Plugin 'Valloric/YouCompleteMe'
-"Compile whiel texting
-Plugin 'scrooloose/syntastic'
+let g:ycm_confirm_extra_conf = 0
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>ji :YcmCompleter GoToDeclaration<CR>
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_auto_trigger = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_filetype_blacklist = {}
+
+
+
+" yet another good quick 
+"Plugin 'ervandew/supertab'
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" snippet engine
 Plugin 'SirVer/ultisnips'
+let g:UltiSnipsSnippetsDir='~/.vim/snippets'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.vim/UltiSnips"]
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsExpandTrigger           = '<tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+
+" snippet patterns
+Plugin 'honza/vim-snippets'
+
+" file browser
+Plugin 'scrooloose/nerdtree'
+nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
+
+Plugin 'jistr/vim-nerdtree-tabs'
+nnoremap <silent> <F6> :TagbarToggle<CR>
+
+" c++/python source overview
+Plugin 'majutsushi/tagbar'
+
+Plugin 'tomtom/tlib_vim'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+let g:pandoc_no_folding = 1
+
+
+"SystemC syntax highlight
+"Plugin 'Kocha/vim-systemc'
+
+"vim with lldb
+"Plugin 'gilligan/vim-lldb'
+"let g:lldb_map_Lframe = "<leader>f"
+
+"Git wrapper
+Plugin 'tpope/vim-fugitive'
+
+"Latex
+Plugin 'gerw/vim-latex-suite'
+
+
+"Scala
+Plugin 'derekwyatt/vim-scala'
+
+"
+Plugin 'terryma/vim-multiple-cursors'
+
+"Quick comment
+Plugin 'tpope/vim-commentary'
+
+"Easy Grep
+Plugin 'dkprice/vim-easygrep'
+
+"Auto pair
+Plugin 'jiangmiao/auto-pairs'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,7 +103,7 @@ filetype plugin indent on    " required
 
 "----end vundle 
 
-"General setting
+"General configurations
 syntax on
 colorscheme desert
 set nu
@@ -61,52 +116,43 @@ set ruler
 
 
 "Specific file type setting
-au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 tags+=~/.vim/tags/stl_tags
-
+au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c set cin ai et nu sw=4 ts=4
-au BufRead,BufNewFile *.h set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80
-au BufRead,BufNewFile *.md set ai et nu sw=4 ts=4 tw=80 spell spelllang=en_us
+au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
+au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
+au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 spell filetype=scala
 
-nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
-nnoremap <silent> <F6> :TagbarToggle<CR>
-nnoremap <F4> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
 
+"Edit and source vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"Compile in Vim
 autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
-nmap <leader>cn :cn<cr>
-nmap <leader>cp :cp<cr>
-nmap <leader>cw :cw 10<cr> 
+nnoremap <leader>cn :cn<cr>
+nnoremap <leader>cp :cp<cr>
+nnoremap <leader>cw :cw 10<cr> 
+nnoremap <leader>cq :ccl<cr> 
 
-
-" OmniCppComplete
-"set nocp 
-"filetype plugin on
-"set completeopt=menu,menuone
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-
-
-"Pandoc vim setting
-let g:pandoc_no_folding = 1
-
-"switch to last tab
+"use \tl to switch to last tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-"Test map
-imap jj <ESC>
 
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:UltiSnipsExpandTrigger="<c-j>"
+imap jk <ESC>
 
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+
+"share clip board
+set clipboard=unnamed
+
+
+
+" Change directory to the current buffer when opening files.
+set autochdir
+
+
+
+map <C-K> :pyf ~/scripts/clang-format-3.4.py<cr>
+imap <C-K> <c-o>:pyf ~/scripts/clang-format-3.4.py<cr>
