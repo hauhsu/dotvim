@@ -29,8 +29,6 @@ let g:ycm_auto_trigger = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion   = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_filetype_blacklist = {}
 
 
@@ -40,8 +38,6 @@ let g:UltiSnipsSnippetsDir='~/.vim/snippets'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.vim/UltiSnips"]
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " snippet patterns
 Plugin 'honza/vim-snippets'
@@ -147,5 +143,14 @@ set clipboard=unnamed
 " Change directory to the current buffer when opening files.
 set autochdir
 
+if has("gui_macvim")
+	set macmeta
+	set mouse=a
+endif
 
-set macmeta
+" map esc to exit terminal emulator
+:tnoremap <Esc> <C-\><C-n>
+
+set termguicolors
+
+
