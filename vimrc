@@ -86,8 +86,9 @@ Plugin 'dkprice/vim-easygrep'
 "Auto pair
 Plugin 'jiangmiao/auto-pairs'
 
+
 "
-Plugin 'tpope/vim-vinegar'
+Plugin 'easymotion/vim-easymotion'
 
 
 " All of your Plugins must be added before the following line
