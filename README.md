@@ -1,4 +1,4 @@
-This is hhsu's vim setting.
+Tjjjjhis is hhsu's vim setting.
 =======
 
 This is my vim setting.

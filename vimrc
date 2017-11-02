@@ -29,24 +29,19 @@ let g:ycm_auto_trigger = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_key_list_select_completion   = ['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_filetype_blacklist = {}
 
-
-
-" yet another good quick 
-"Plugin 'ervandew/supertab'
-"let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.vim/UltiSnips"]
 let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsExpandTrigger           = '<tab>'
-let g:UltiSnipsJumpForwardTrigger      = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " snippet patterns
 Plugin 'honza/vim-snippets'
@@ -70,16 +65,12 @@ let g:pandoc_no_folding = 1
 "SystemC syntax highlight
 "Plugin 'Kocha/vim-systemc'
 
-"vim with lldb
-"Plugin 'gilligan/vim-lldb'
-"let g:lldb_map_Lframe = "<leader>f"
 
 "Git wrapper
 Plugin 'tpope/vim-fugitive'
 
 "Latex
 Plugin 'gerw/vim-latex-suite'
-
 
 "Scala
 Plugin 'derekwyatt/vim-scala'
@@ -95,7 +86,6 @@ Plugin 'dkprice/vim-easygrep'
 
 "Auto pair
 Plugin 'jiangmiao/auto-pairs'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -121,33 +111,33 @@ au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
 au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 spell filetype=scala
-
+au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
+au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
+au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
 
 "Edit and source vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-"Compile in Vim
+"Compile C/C++ in Vim
 autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
 nnoremap <leader>cn :cn<cr>
 nnoremap <leader>cp :cp<cr>
 nnoremap <leader>cw :cw 10<cr> 
 nnoremap <leader>cq :ccl<cr> 
 
+
 "use \tl to switch to last tab
 let g:lasttab = 1
-nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nnoremap <Leader>gt :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 
 imap jk <ESC>
 
 
-
 "share clip board
 set clipboard=unnamed
-
-
 
 " Change directory to the current buffer when opening files.
 set autochdir

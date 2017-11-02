@@ -1,0 +1,49 @@
+#######################
+#       SystemC       #
+#######################
+
+snippet scmodule "systemc module"
+SC_MODULE(${1:module_name}) 
+{
+	SC_CTOR($1) {
+		${0}
+	}
+};
+endsnippet
+
+snippet scmain "sc_main"
+int sc_main(int argc, char *argv[])
+{
+	${0}
+	sc_start();
+	return 0;
+}
+endsnippet
+
+snippet time "sc_time"
+sc_time(${1}, ${2:sc_core::SC_NS});
+endsnippet
+
+snippet timestamp "sc_time_stamp"
+sc_time_stamp();
+endsnippet
+
+snippet wait "sc_wait"
+wait(${1:event});
+endsnippet
+
+snippet inc_tlm_simple_init_socket
+#include "tlm_utils/simple_initiator_socket.h"
+endsnippet
+
+snippet inc_tlm_simple_target_socket
+#include "tlm_utils/simple_target_socket.h"
+endsnippet
+
+snippet tlm_simple_init_socket
+tlm_utils::simple_initiator_socket<${1}> ${2:socket};
+endsnippet
+
+snippet tlm_simple_targ_socket
+tlm_utils::simple_target_socket<${1}> ${2:socket};
+endsnippet
