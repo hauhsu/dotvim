@@ -1,4 +1,4 @@
-"----Vundle
+"----Vundle {{{
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
@@ -45,12 +45,13 @@ Plugin 'honza/vim-snippets'
 " file browser
 Plugin 'scrooloose/nerdtree'
 nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
+" NERDTress File highlighting
 
 Plugin 'jistr/vim-nerdtree-tabs'
-nnoremap <silent> <F6> :TagbarToggle<CR>
 
 " c++/python source overview
 Plugin 'majutsushi/tagbar'
+nnoremap <silent> <F6> :TagbarToggle<CR>
 
 Plugin 'tomtom/tlib_vim'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -91,11 +92,22 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'easymotion/vim-easymotion'
 
 
+"
+Plugin 'sjl/gundo.vim'
+nnoremap <F7> :GundoToggle<CR>
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"----end vundle 
+"----end vundle }}}
+
+"Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
 
 "General configurations
 syntax on
@@ -115,6 +127,7 @@ au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
+au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80 
 au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
 au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
@@ -125,10 +138,34 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "Compile C/C++ in Vim
-autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
+autocmd FileType c,cpp  normap <buffer> <leader><space> :w<cr>:make<cr>
 nnoremap <leader>cn :cn<cr>
 nnoremap <leader>cp :cp<cr>
 nnoremap <leader>cw :cw 10<cr> 
+
+"Toggle Quick Fix window
+nnoremap <leader>q :call QuickfixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+
+"Toggle number
+nnoremap <leader>n :setlocal number!<cr>
+
+"Toggle paste mode
+nnoremap <leader>p :setlocal paste!<cr>
+
 
 "use \tl to switch to last tab
 let g:lasttab = 1
@@ -136,7 +173,7 @@ nnoremap <Leader>gt :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 
-imap jk <ESC>
+inoremap jk <ESC>
 
 "share clip board
 set clipboard=unnamed
