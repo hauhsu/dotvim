@@ -1,26 +1,12 @@
-"----Vundle
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-	echo "Installing Vundle.."
-	echo ""
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/Vundle.vim
-	let iCanHazVundle=0
-endif
+"---------
+" Plugins
+"---------
+call plug#begin('~/.vim/plugged')
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" super strong auto complete 
-Plugin 'Valloric/YouCompleteMe'
+"
+" Super strong auto complete 
+"
+Plug 'Valloric/YouCompleteMe'
 let g:ycm_confirm_extra_conf = 0
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>ji :YcmCompleter GoToDeclaration<CR>
@@ -30,128 +16,150 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_blacklist = {}
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['pylint', 'python', 'flask8', 'mypy']
 
 
-" snippet engine
-Plugin 'SirVer/ultisnips'
+"
+" Snippet engine
+"
+Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.vim/UltiSnips"]
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsExpandTrigger="<c-j>"
 
+
 " snippet patterns
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
-" file browser
-Plugin 'scrooloose/nerdtree'
-nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
+"
+" Vim undo history browser
+"
+Plug 'sjl/gundo.vim'
 
-Plugin 'jistr/vim-nerdtree-tabs'
-nnoremap <silent> <F6> :TagbarToggle<CR>
+"
+" Git history browser
+"
+Plug 'junegunn/gv.vim'
 
-" c++/python source overview
-Plugin 'majutsushi/tagbar'
+"
+" File browser
+"
+Plug 'scrooloose/nerdtree'
+nnoremap <leader>t :NERDTreeToggle<CR>
+" open nerdtree in current file dir
+map <Leader>nt :NERDTree %:p:h<CR>
+let NERDTreeIgnore=['\.o$', '__pycache__' ]
 
-Plugin 'tomtom/tlib_vim'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-let g:pandoc_no_folding = 1
+" C/C++ Python source overview
+Plug 'majutsushi/tagbar'
+nnoremap <leader>y :TagbarToggle<CR>
 
+"
+"Syntax checking
+"
+Plug 'vim-syntastic/syntastic'
+nnoremap <leader>sy :SyntasticToggleMode<CR>
 
-"SystemC syntax highlight
-"Plugin 'Kocha/vim-systemc'
-
-"vim with lldb
-Plugin 'gilligan/vim-lldb'
-let g:lldb_map_Lframe = "<leader>f"
-
+"
 "Git wrapper
-Plugin 'tpope/vim-fugitive'
-
-"Latex
-Plugin 'gerw/vim-latex-suite'
-
-"Scala
-Plugin 'derekwyatt/vim-scala'
+"
+Plug 'tpope/vim-fugitive'
 
 "
-Plugin 'terryma/vim-multiple-cursors'
-
-"Quick comment
-Plugin 'tpope/vim-commentary'
-
-"Easy Grep
-Plugin 'dkprice/vim-easygrep'
-
-"Auto pair
-Plugin 'jiangmiao/auto-pairs'
-
+" Multiple cursor
+"
+Plug 'mg979/vim-visual-multi'
 
 "
-Plugin 'easymotion/vim-easymotion'
+" Quick comment
+"
+Plug 'tpope/vim-commentary'
+
+"
+" Grep in vim
+"
+Plug 'dkprice/vim-easygrep'
+
+"
+" Move like 
+"
+Plug 'easymotion/vim-easymotion'
+
+"
+" Show indent
+"
+Plug 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup = 1
+
+call plug#end()
+"----end plugged
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-"----end vundle 
-
-"General configurations
+"------------------------
+" General configurations
+"------------------------
 syntax on
 colorscheme desert
-set nu
+set number
 set hlsearch
 set tabstop=4
 set shiftwidth=4
-set ai
+set autoindent
 set backspace=indent,eol,start
 set ruler
 set mouse=a
-
-
-"Specific file type setting
-au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 
-au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
-au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
-au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
-au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
-
-
-"Edit and source vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-"Compile C/C++ in Vim
-autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
-nnoremap <leader>cn :cn<cr>
-nnoremap <leader>cp :cp<cr>
-nnoremap <leader>cw :cw 10<cr> 
-
-"use \tl to switch to last tab
-let g:lasttab = 1
-nnoremap <Leader>gt :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-
-imap jk <ESC>
-
 "share clip board
 set clipboard=unnamed
-
 " Change directory to the current buffer when opening files.
 set autochdir
+" Make vim more colorful
+set termguicolors
 
 if has("gui_macvim")
 	set macmeta
 	set mouse=a
 endif
 
-" map esc to exit terminal emulator
-:tnoremap <Esc> <C-\><C-n>
+" Specific file type setting
+au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 
+au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
+au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
+au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=79
+au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=79
+au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
+au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
+au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
 
-set termguicolors
 
+"-------------
+" Key Mapping
+"-------------
 
+" Edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Run make for C/C++
+autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
+nnoremap <leader>cn :cn<cr>
+nnoremap <leader>cp :cp<cr>
+nnoremap <leader>cw :cw 10<cr> 
+
+" Tab navigation
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+
+" Cancel highlight
+nnoremap <leader>h :noh<cr> 
+
+" Map jk to ESC
+imap jk <ESC>
