@@ -162,3 +162,7 @@ nnoremap <leader>h :noh<cr>
 
 " Map jk to ESC
 imap jk <ESC>
+
+" Highlight trailing spaces
+highlight ExtraWhitespace ctermbg=red
+match ExtraWhitespace /\s\+$/
